@@ -15,7 +15,9 @@ ENV METABASE_USER="metabase" \
 RUN groupadd -r --gid "$METABASE_GID" "$METABASE_GROUP"
 RUN useradd -r --uid "$METABASE_UID" --gid "$METABASE_GID" "$METABASE_USER"
 
-RUN curl -L $METABASE_DIST_URL --output /opt/metabase/app.jar; \
+RUN apt-get -y update; \
+    apt-get -y install curl; \
+    curl -L $METABASE_DIST_URL --output /opt/metabase/app.jar; \
     chown $METABASE_USER:$METABASE_GROUP -R /opt/metabase
 
 COPY entrypoint /opt/metabase
