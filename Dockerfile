@@ -16,7 +16,7 @@ RUN useradd -r --uid "$METABASE_UID" --gid "$METABASE_GID" "$METABASE_USER"
 
 RUN apt-get update && \
     apt-get -y install curl && \
-    curl -L "https://downloads.metabase.com/v$APPLICATION_VERSION/metabase.jar" --output /opt/metabase/app.jar && \
+    curl -L https://downloads.metabase.com/v$APPLICATION_VERSION/metabase.jar --output /opt/metabase/app.jar && \
     chown $METABASE_USER:$METABASE_GROUP -R /opt/metabase && \
     apt-get clean
 
