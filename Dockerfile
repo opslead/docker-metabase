@@ -3,6 +3,8 @@ FROM azul/zulu-openjdk:11
 LABEL maintainer="opslead"
 LABEL repository="https://github.com/opslead/docker-metabase"
 
+ARG METABASE_VERSION
+
 WORKDIR /opt/metabase
 
 ENV METABASE_USER="metabase" \
