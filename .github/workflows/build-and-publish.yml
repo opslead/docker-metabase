@@ -7,7 +7,7 @@ on:
   pull_request:
 
 env:
-  APPLICATION_VERSION: 0.47.9
+  METABASE_VERSION: 0.47.9
 
 jobs:
   build-and-push-docker-image:
@@ -34,10 +34,10 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           build-args: |
-            APPLICATION_VERSION=${{ env.APPLICATION_VERSION }}
+            METABASE_VERSION=${{ env.METABASE_VERSION }}
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/metabase:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/metabase:${{ env.APPLICATION_VERSION }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/metabase:${{ env.METABASE_VERSION }}
           push: ${{ github.ref == 'refs/heads/main' }}
       
       - name: Update repo description
