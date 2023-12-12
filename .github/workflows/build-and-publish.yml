@@ -34,8 +34,8 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           tags: |
-            opslead/metabase:latest
-            opslead/metabase:${{ APPLICATION_VERSION }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/metabase:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/metabase:${{ env.APPLICATION_VERSION }}
           push: ${{ github.ref == 'refs/heads/main' }}
       
       - name: Update repo description
@@ -43,4 +43,4 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          repository: opslead/metabase
+          repository: ${{ secrets.DOCKERHUB_USERNAME }}/metabase
