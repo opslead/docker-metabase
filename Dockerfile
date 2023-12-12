@@ -9,16 +9,16 @@ ENV METABASE_USER="metabase" \
     METABASE_UID="8983" \
     METABASE_GROUP="metabase" \
     METABASE_GID="8983" \
-    METABASE_DIST_URL="https://downloads.metabase.com/v0.47.9/metabase.jar" \
     MB_JETTY_PORT="8080"
 
 RUN groupadd -r --gid "$METABASE_GID" "$METABASE_GROUP"
 RUN useradd -r --uid "$METABASE_UID" --gid "$METABASE_GID" "$METABASE_USER"
 
-RUN apt-get -y update; \
-    apt-get -y install curl; \
-    curl -L $METABASE_DIST_URL --output /opt/metabase/app.jar; \
-    chown $METABASE_USER:$METABASE_GROUP -R /opt/metabase
+RUN apt-get update && \
+    apt-get -y install curl && \
+    curl -L "https://downloads.metabase.com/v$APPLICATION_VERSION/metabase.jar" --output /opt/metabase/app.jar && \
+    chown $METABASE_USER:$METABASE_GROUP -R /opt/metabase && \
+    apt-get clean
 
 COPY entrypoint /opt/metabase
 RUN chmod +x /opt/metabase/entrypoint
