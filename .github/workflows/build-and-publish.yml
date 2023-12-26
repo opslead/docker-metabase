@@ -1,10 +1,8 @@
 name: Build and Publish
 
 on:
-  workflow_dispatch:
   push:
     branches: [main]
-  pull_request:
 
 env:
   METABASE_VERSION: 0.47.9
@@ -38,7 +36,7 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/metabase:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/metabase:${{ env.METABASE_VERSION }}
-          push: ${{ github.ref == 'refs/heads/main' }}
+          push: true
       
       - name: Update repo description
         uses: peter-evans/dockerhub-description@v3
